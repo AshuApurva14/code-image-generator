@@ -1,4 +1,8 @@
 import base64
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 from flask import (
     Flask,
@@ -15,9 +19,8 @@ from pygments.styles import get_all_styles
 from utils import take_screenshot_from_url
 
 app = Flask(__name__)
-app.secret_key = (
-    "eb1c247c8b54954301304ac122b9ecb661da3bc6c92fefb74a7208c3cfa3165a"  # See the README.md file for instructions
-)
+app.secret_key = os.getenv('SECRET_KEY')   # See the README.md file for instructions
+
 
 PLACEHOLDER_CODE = "print('Hello, World!')"
 DEFAULT_STYLE = "monokai"
