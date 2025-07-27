@@ -116,3 +116,6 @@ code-image-generator/
     ├── style_selection.html # Theme selection
     └── image.html     # Image output page
 ```
+## Flow Diagram
+
+[Flow Diagram](https://github.com/AshuApurva14/code-image-generator/blob/45110beed8bf168d6080e70b1e580561032ca0b3/code-image-generator/Flowdiagram.html)
