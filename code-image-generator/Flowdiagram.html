@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<title>Markmap</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+}
+html {
+  font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+#mindmap {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+}
+.markmap-dark {
+  background: #27272a;
+  color: white;
+}
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/markmap-toolbar@0.18.12/dist/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.11.1/styles/default.min.css">
+</head>
+<body>
+<svg id="mindmap"></svg>
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script><script src="https://cdn.jsdelivr.net/npm/markmap-view@0.18.12/dist/browser/index.js"></script><script src="https://cdn.jsdelivr.net/npm/markmap-toolbar@0.18.12/dist/index.js"></script><script>(r => {
+              setTimeout(r);
+            })(function renderToolbar() {
+  const {
+    markmap,
+    mm
+  } = window;
+  const {
+    el
+  } = markmap.Toolbar.create(mm);
+  el.setAttribute('style', 'position:absolute;bottom:20px;right:20px');
+  document.body.append(el);
+})</script><script>((getMarkmap, getOptions, root2, jsonOptions) => {
+              const markmap = getMarkmap();
+              window.mm = markmap.Markmap.create(
+                "svg#mindmap",
+                (getOptions || markmap.deriveOptions)(jsonOptions),
+                root2
+              );
+              if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+                document.documentElement.classList.add("markmap-dark");
+              }
+            })(() => window.markmap,null,{"content":"&#x1f4f8; Code Image Generator","children":[{"content":"&#x2728; Overview","children":[{"content":"Documentation","children":[],"payload":{"tag":"li","lines":"15,16"}},{"content":"Social media posts","children":[],"payload":{"tag":"li","lines":"16,17"}},{"content":"Educational content","children":[],"payload":{"tag":"li","lines":"17,18"}},{"content":"Code presentations","children":[],"payload":{"tag":"li","lines":"18,20"}}],"payload":{"tag":"h2","lines":"12,13"}},{"content":"&#x1f3af; Key Features","children":[{"content":"<strong>Live Preview</strong>: See your styled code in real-time","children":[],"payload":{"tag":"li","lines":"22,23"}},{"content":"<strong>Multiple Themes</strong>: Choose from various syntax highlighting options","children":[],"payload":{"tag":"li","lines":"23,24"}},{"content":"<strong>High Quality</strong>: 2x scaled output for crystal clear images","children":[],"payload":{"tag":"li","lines":"24,25"}},{"content":"<strong>Simple Interface</strong>: User-friendly, three-step process","children":[],"payload":{"tag":"li","lines":"25,26"}},{"content":"<strong>Quick Download</strong>: One-click image saving","children":[],"payload":{"tag":"li","lines":"26,27"}},{"content":"<strong>Session Support</strong>: Your code persists between visits","children":[],"payload":{"tag":"li","lines":"27,29"}}],"payload":{"tag":"h2","lines":"20,21"}},{"content":"&#x1f680; Quick Start","children":[{"content":"Prerequisites","children":[{"content":"Python 3.12+","children":[],"payload":{"tag":"li","lines":"33,34"}},{"content":"pip package manager","children":[],"payload":{"tag":"li","lines":"34,36"}}],"payload":{"tag":"h3","lines":"31,32"}},{"content":"Setup","children":[{"content":"<pre data-lines=\"39,43\"><code class=\"language-bash\">git <span class=\"hljs-built_in\">clone</span> https://github.com/yourusername/code-image-generator.git\n<span class=\"hljs-built_in\">cd</span> code-image-generator\n</code></pre>","children":[],"payload":{"tag":"pre","lines":"39,43"}},{"content":"<pre data-lines=\"45,49\"><code class=\"language-bash\">python -m venv venv\n<span class=\"hljs-built_in\">source</span> venv/bin/activate  <span class=\"hljs-comment\"># On Windows: venv\\Scripts\\activate</span>\n</code></pre>","children":[],"payload":{"tag":"pre","lines":"45,49"}},{"content":"<pre data-lines=\"51,54\"><code class=\"language-bash\">pip install -r requirements.txt\n</code></pre>","children":[],"payload":{"tag":"pre","lines":"51,54"}},{"content":"<pre data-lines=\"56,59\"><code class=\"language-bash\">python secret_generator.py &gt; .<span class=\"hljs-built_in\">env</span>\n</code></pre>","children":[],"payload":{"tag":"pre","lines":"56,59"}},{"content":"<pre data-lines=\"61,64\"><code class=\"language-bash\">playwright install webkit\n</code></pre>","children":[],"payload":{"tag":"pre","lines":"61,64"}}],"payload":{"tag":"h3","lines":"36,37"}},{"content":"Running the App","children":[{"content":"<pre data-lines=\"68,71\"><code class=\"language-bash\">python app.py\n</code></pre>","children":[],"payload":{"tag":"pre","lines":"68,71"}}],"payload":{"tag":"h3","lines":"65,66"}}],"payload":{"tag":"h2","lines":"29,30"}},{"content":"&#x1f3a8; How to Use","children":[{"content":"1. <strong>Enter Code</strong>: Paste your Python code in the provided text area.","children":[],"payload":{"tag":"li","lines":"77,78","listIndex":1}},{"content":"2. <strong>Select Style</strong>: Choose from a variety of syntax highlighting themes.","children":[],"payload":{"tag":"li","lines":"78,79","listIndex":2}},{"content":"3. <strong>Generate Image</strong>: Click on &quot;Create Image&quot; to generate your code screenshot.","children":[],"payload":{"tag":"li","lines":"79,80","listIndex":3}},{"content":"4. <strong>Download Image</strong>: Use the download button to save your image.","children":[],"payload":{"tag":"li","lines":"80,82","listIndex":4}}],"payload":{"tag":"h2","lines":"75,76"}},{"content":"&#x1f6e0;&#xfe0f; Tech Stack","children":[{"content":"<a href=\"https://flask.palletsprojects.com/\">Flask</a> - Web framework","children":[],"payload":{"tag":"li","lines":"84,85"}},{"content":"<a href=\"https://pygments.org/\">Pygments</a> - Syntax highlighting","children":[],"payload":{"tag":"li","lines":"85,86"}},{"content":"<a href=\"https://playwright.dev/\">Playwright</a> - Browser automation for screenshots","children":[],"payload":{"tag":"li","lines":"86,87"}},{"content":"<a href=\"https://github.com/theskumar/python-dotenv\">Python-dotenv</a> - Environment management","children":[],"payload":{"tag":"li","lines":"87,89"}}],"payload":{"tag":"h2","lines":"82,83"}},{"content":"&#x1f4dd; License","children":[],"payload":{"tag":"h2","lines":"89,90"}},{"content":"&#x1f91d; Contributing","children":[{"content":"1. Fork the repository","children":[],"payload":{"tag":"li","lines":"97,98","listIndex":1}},{"content":"2. Create a feature branch","children":[],"payload":{"tag":"li","lines":"98,99","listIndex":2}},{"content":"3. Commit your changes","children":[],"payload":{"tag":"li","lines":"99,100","listIndex":3}},{"content":"4. Push to your branch","children":[],"payload":{"tag":"li","lines":"100,101","listIndex":4}},{"content":"5. Open a Pull Request","children":[],"payload":{"tag":"li","lines":"101,103","listIndex":5}}],"payload":{"tag":"h2","lines":"93,94"}},{"content":"&#x1f6a7; Project Structure","children":[{"content":"<pre data-lines=\"105,118\"><code data-lines=\"105,118\">code-image-generator<span class=\"hljs-symbol\">/</span>\n&#x251c;&#x2500;&#x2500; app.py              <span class=\"hljs-comment\"># Main Flask application</span>\n&#x251c;&#x2500;&#x2500; utils.py           <span class=\"hljs-comment\"># Screenshot utilities</span>\n&#x251c;&#x2500;&#x2500; secret_generator.py <span class=\"hljs-comment\"># Secret key generator</span>\n&#x251c;&#x2500;&#x2500; static<span class=\"hljs-symbol\">/</span>\n&#x2502;   &#x2514;&#x2500;&#x2500; styles.css     <span class=\"hljs-comment\"># Application styles</span>\n&#x2514;&#x2500;&#x2500; templates<span class=\"hljs-symbol\">/</span>\n    &#x251c;&#x2500;&#x2500; base.html      <span class=\"hljs-comment\"># Base template</span>\n    &#x251c;&#x2500;&#x2500; code_input.html    <span class=\"hljs-comment\"># Code input page</span>\n    &#x251c;&#x2500;&#x2500; style_selection.html <span class=\"hljs-comment\"># Theme selection</span>\n    &#x2514;&#x2500;&#x2500; image.html     <span class=\"hljs-comment\"># Image output page</span>\n</code></pre>","children":[],"payload":{"tag":"pre","lines":"105,118"}}],"payload":{"tag":"h2","lines":"103,104"}}],"payload":{"tag":"h1","lines":"0,1"}},{})</script>
+</body>
+</html>
