@@ -33,7 +33,25 @@ COPY requirements.txt .
  
 # Install Python dependencies with caching
 RUN --mount=type=cache,target=/root/.cache/pip \
-    pip install -r requirements.txt
+    pip install -r requirements.txt \
+    && pip install --no-cache-dir playwright \
+    && python -m playwright install chromium
+
+RUN apt-get update && apt-get install -y \
+    libnss3 \
+    libatk1.0-0 \
+    libatk-bridge2.0-0 \
+    libcups2 \
+    libdrm2 \
+    libxkbcommon0 \
+    libxcomposite1 \
+    libxdamage1 \
+    libxfixes3 \
+    libxrandr2 \
+    libgbm1 \
+    libasound2 \
+    && rm -rf /var/lib/apt/lists/*
+
  
 # Copy the rest of the application code
 COPY . .
@@ -69,10 +87,10 @@ USER appuser
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=3s \
-  CMD curl -f http://localhost:8000/health || exit 1
+  CMD curl -f http://localhost:8000/ || exit 1
  
 # Expose the port your application runs on
 EXPOSE 8000
  
 # Run your application
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "myapp.wsgi:application"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "app:app"]

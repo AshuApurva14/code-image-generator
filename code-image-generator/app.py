@@ -2,7 +2,7 @@ import base64
 from dotenv import load_dotenv
 import os
 
-load_dotenv()
+#load_dotenv()
 
 from flask import (
     Flask,
@@ -95,3 +95,7 @@ def image():
         "image_b64": base64.b64encode(image_bytes).decode("utf-8"),
     }
     return render_template("image.html", **context)
+
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=8000)
