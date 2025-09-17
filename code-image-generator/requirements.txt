@@ -11,5 +11,5 @@ playwright==1.54.0
 pyee==13.0.0
 Pygments==2.19.2
 python-dotenv==1.1.1
-typing_extensions==4.14.1
+typing_extensions==4.15.0
 Werkzeug==3.1.3
