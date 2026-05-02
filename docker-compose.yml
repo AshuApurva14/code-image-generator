@@ -9,7 +9,7 @@ services:
      - 8000:8000
 
    environment:
-     - SECRET_KEY=55f36039c4b081230138df54d4dbf3452fea120426289bb24b23d1436be31e7b
+     - SECRET_KEY={SECRET_KEY}
 
    networks:
      - backend_network
