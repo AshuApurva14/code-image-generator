@@ -1,96 +1,46 @@
-# Start with a slim Python base image - 3.12 is recommended for modern features and performance
-FROM python:3.12-slim-bookworm AS base
+############################
+# 1) Builder stage
+############################
+FROM python:3.12-slim AS builder
 
-# Set environment variables
-ENV PYTHONFAULTHANDLER=1 \
+ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONHASHSEED=random \
-    PIP_NO_CACHE_DIR=off \
-    PIP_DISABLE_PIP_VERSION_CHECK=on \
-    PIP_DEFAULT_TIMEOUT=100
+    PIP_NO_CACHE_DIR=1
 
-# --------------------------------------
-# Stage 1: Builder - installs dependencies and prepares app
-# --------------------------------------
-FROM base AS builder
+WORKDIR /build
 
-# Install build dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
+    gcc \
     && rm -rf /var/lib/apt/lists/*
 
-# Set up a virtual environment
-RUN python -m venv /opt/venv
-# Ensure we use the virtual environment
-ENV PATH="/opt/venv/bin:$PATH"
-
-# Set working directory
-WORKDIR /app
-
-# Copy and install requirements first for better caching
 COPY requirements.txt .
 
-# Install Python dependencies with caching
-RUN --mount=type=cache,target=/root/.cache/pip \
-    pip install -r requirements.txt \
-    && pip install --no-cache-dir playwright \
-    && python -m playwright install chromium
-
-RUN apt-get update && apt-get install -y \
-    libnss3 \
-    libatk1.0-0 \
-    libatk-bridge2.0-0 \
-    libcups2 \
-    libdrm2 \
-    libxkbcommon0 \
-    libxcomposite1 \
-    libxdamage1 \
-    libxfixes3 \
-    libxrandr2 \
-    libgbm1 \
-    libasound2 \
-    && rm -rf /var/lib/apt/lists/*
+RUN pip install --upgrade pip wheel setuptools && \
+    pip wheel --no-cache-dir --wheel-dir /wheels -r requirements.txt
 
 
-# Copy the rest of the application code
-COPY . .
+############################
+# 2) Runtime stage
+############################
+FROM mcr.microsoft.com/playwright/python:v1.50.0-noble AS runtime
 
-# If you have a build step (e.g., compiling assets), run it here
-# RUN pip install .
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1 \
+    FLASK_ENV=production
 
-# --------------------------------------
-# Stage 2: Final production image
-# --------------------------------------
-FROM base
-
-# Create a non-root user and group
-RUN groupadd -r appuser && useradd -r -g appuser appuser
-
-# Set working directory
 WORKDIR /app
 
-# Copy only the virtual environment from the builder stage
-COPY --from=builder /opt/venv /opt/venv
+COPY requirements.txt .
+COPY --from=builder /wheels /wheels
 
-# Copy application code
-COPY --from=builder /app /app
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir /wheels/* && \
+    rm -rf /wheels
 
-# Set environment variables to use virtual environment
-ENV PATH="/opt/venv/bin:$PATH"
+COPY . .
 
-# Set ownership for application files
-RUN chown -R appuser:appuser /app
-
-# Switch to non-root user
-USER appuser
-
-# Health check
-HEALTHCHECK --interval=30s --timeout=3s \
-  CMD curl -f http://localhost:8000/ || exit 1
-
-# Expose the port your application runs on
 EXPOSE 8000
 
-# Run your application
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "app:app"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "2", "--threads", "4", "app:app"]
