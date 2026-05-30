@@ -5,8 +5,8 @@ on:
 
 jobs:
   
-  quality:
-    name: Quality Checks
+  setup_env:
+    name: Setup Enviornment
     runs-on: ubuntu-latest
 
     permissions:
@@ -20,7 +20,7 @@ jobs:
           fetch-depth: 0
 
       - name: Intiallise Environment
-        uses: ./.github/actions/install-deps/action.yml
+        uses: ./.github/actions/install-deps
         with:
           python-version: '3.14'
           requirements-path: 'requirements.txt'
