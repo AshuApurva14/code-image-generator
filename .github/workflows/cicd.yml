@@ -1,0 +1,170 @@
+name: Build and deploy Code image Generator
+
+on:
+  workflow_dispatch:
+
+jobs:
+  
+  quality:
+    name: Quality Checks
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+    
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v6
+        with: 
+          fetch-depth: 0
+
+      - name: Intiallise Environment
+        uses: ./.github/actions/install-deps/action.yml
+        with:
+          python-version: '3.14'
+          requirements-path: 'requirements.txt'
+
+      
+
+      
+           
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
