@@ -3,20 +3,28 @@ name: Build and deploy Code image Generator
 on:
   workflow_dispatch:
 
+  pull_request:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  
-  setup_env:
-    name: Setup Enviornment
+
+  quality:
+    name: Quality Checks
     runs-on: ubuntu-latest
 
     permissions:
       contents: read
-    
-    
+
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v6
-        with: 
+        with:
           fetch-depth: 0
 
       - name: Intiallise Environment
@@ -24,147 +32,3 @@ jobs:
         with:
           python-version: '3.14'
           requirements-path: 'requirements.txt'
-
-      
-
-      
-           
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  

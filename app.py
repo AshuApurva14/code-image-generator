@@ -1,8 +1,5 @@
 import base64
-from dotenv import load_dotenv
 import os
-
-#load_dotenv()
 
 from flask import (
     Flask,
@@ -19,7 +16,7 @@ from pygments.styles import get_all_styles
 from utils import take_screenshot_from_url
 
 app = Flask(__name__)
-app.secret_key = os.getenv('SECRET_KEY')   # See the README.md file for instructions
+app.secret_key = os.getenv("SECRET_KEY")  # See the README.md file for instructions
 
 
 PLACEHOLDER_CODE = "print('Hello, World!')"
@@ -65,9 +62,7 @@ def style():
         "style": session["style"],
         "style_definitions": formatter.get_style_defs(),
         "style_bg_color": formatter.style.background_color,
-        "highlighted_code": highlight(
-            session["code"], Python3Lexer(), formatter
-        ),
+        "highlighted_code": highlight(session["code"], Python3Lexer(), formatter),
     }
     return render_template("style_selection.html", **context)
 
@@ -97,5 +92,5 @@ def image():
     return render_template("image.html", **context)
 
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8000)

@@ -1,9 +1,15 @@
 default:
    @just --list
 
+
+lint:
+    pip install ruff mypy
+    ruff check .
+    ruff format .
+
 # Build the Docker image
 dev-up:
-    docker compose up -d 
+    docker compose up -d
 
 
 dev-down:

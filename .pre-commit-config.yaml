@@ -5,6 +5,19 @@ repos:
         - id: gitleaks
 
 
+  # Ruff Linter and Formatter
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    # Use the latest stable version tag
+    rev: v0.15.17
+    hooks:
+      # 1. Run the linter and fix safe errors automatically
+      - id: ruff-check
+        args: [ --fix ]
+      # 2. Run the formatter to auto-style code blocks
+      - id: ruff-format
+
+
+
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.5.0
     hooks:
