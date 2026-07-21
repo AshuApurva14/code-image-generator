@@ -1,28 +1,32 @@
 default:
    @just --list
 
+setup:
+    pip install ruff mypy
 
 lint:
-    pip install ruff mypy
     ruff check .
     ruff format .
 
 # Build the Docker image
 dev-up:
-    docker compose up -d
+    cd dev/ && docker compose up -d
 
 
 dev-down:
-    docker compose down
+    cd dev/ && docker compose down
 
 dev-build:
-    docker compose build --no-cache
+    cd dev/ && docker compose build --no-cache
 
 logs:
-    docker logs --timestamps
+    cd dev/ && docker compose logs --timestamps
+
+logs-follow:
+    cd dev/ && docker compose logs -f --timestamps
 
 remove:
-    docker system prune -a -f
+    cd dev/ && docker system prune -a -f
 
 img-list:
-    docker compose images
+    cd dev/ && docker compose images
